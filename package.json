@@ -13,6 +13,7 @@
     "rxjs": "^6.5.4"
   },
   "devDependencies": {
+    "standard": "^17.0.0",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11"
   },
