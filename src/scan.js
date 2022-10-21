@@ -30,7 +30,7 @@ function runScanner ({ boardWidth, boardHeight, begin, end } = {}) {
     for (const { index } of currentCells) {
       runInSandbox(parentCellsContainer, newCellsContainer => {
         const cell = cells[index]
-        cell.subject.next(1)
+        cell.mark()
         positions.push({ x: cell.x, y: cell.y })
 
         if (positions.length === 1) {
