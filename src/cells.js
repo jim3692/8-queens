@@ -94,6 +94,32 @@ function diagonalsGenerator (boardWidth, boardHeight) {
   return cells
 }
 
+function horseyGenerator (boardWidth, boardHeight) {
+  const cells = generateCells(boardWidth, boardHeight, 'horsey')
+
+  const nextLocations = cells
+    .map(c => [
+      { x: c.x - 2, y: c.y - 1 },
+      { x: c.x + 2, y: c.y - 1 },
+      { x: c.x - 2, y: c.y + 1 },
+      { x: c.x + 2, y: c.y + 1 },
+      { x: c.x - 1, y: c.y - 2 },
+      { x: c.x + 1, y: c.y - 2 },
+      { x: c.x - 1, y: c.y + 2 },
+      { x: c.x + 1, y: c.y + 2 }
+    ]
+      .filter(({ x }) => x >= 0)
+      .filter(({ x }) => x < boardWidth)
+      .filter(({ y }) => y >= 0)
+      .filter(({ y }) => y < boardHeight)
+      .map(({ x, y }) => newCellFromCoords(boardWidth, boardHeight, x, y)
+        .extend({ name: 'horseyNext', parent: c.index }))
+    )
+
+  connectCellsToNextLocations(cells, nextLocations)
+  return cells
+}
+
 function instantiateCells (boardWidth, boardHeight) {
   const straights = straightsGenerator(boardWidth, boardHeight)
   const diagonals = diagonalsGenerator(boardWidth, boardHeight)
