@@ -126,6 +126,29 @@ function instantiateCells (boardWidth, boardHeight) {
 
   const cells = generateCells(boardWidth, boardHeight, 'main')
 
+  if (typeof process !== 'undefined' && process.env.SCAN_VARIANT === 'knook') {
+    const horsies = horseyGenerator(boardWidth, boardHeight)
+
+    cells.forEach(cell => {
+      [
+        straights[cell.index],
+        horsies[cell.index]
+      ].forEach(nextLocation => {
+        nextLocation.subject
+          .subscribe(v => cell.mark(v))
+      })
+
+      cell.subject
+        .pipe(filter(v => v.length === 1))
+        .subscribe(v => {
+          straights[cell.index].mark(v)
+          horsies[cell.index].mark(v)
+        })
+    })
+
+    return cells
+  }
+
   cells.forEach(cell => {
     [
       straights[cell.index],

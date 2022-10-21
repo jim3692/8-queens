@@ -5,6 +5,7 @@
   "scripts": {
     "build": "webpack",
     "exec:scan": "node src/scan.js",
+    "exec:scan:knook": "SCAN_VARIANT=knook node src/scan.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
