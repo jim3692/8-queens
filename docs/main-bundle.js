@@ -93,8 +93,33 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("/* global Worker */\r\n\r\nwindow.onload = () => {\r\n  const worker = new Worker('./scan-bundle.js')\r\n\r\n  worker.postMessage([])\r\n  worker.onmessage = e => {\r\n    const fens = e.data\r\n    document.getElementById('calculating').remove()\r\n    const solutions = document.getElementById('solutions');\r\n\r\n    ([...fens]).forEach(fen => {\r\n      const a = document.createElement('a')\r\n      a.href = 'https://lichess.org/editor/' + fen.split(' ').join('_')\r\n      a.innerText = fen\r\n      a.target = '_blank'\r\n\r\n      const li = document.createElement('li')\r\n      li.appendChild(a)\r\n\r\n      solutions.appendChild(li)\r\n    })\r\n  }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/main.js?");
+/* global Worker */
+
+window.onload = () => {
+  const worker = new Worker('./scan-bundle.js')
+
+  worker.postMessage([])
+  worker.onmessage = e => {
+    const fens = e.data
+    document.getElementById('calculating').remove()
+    const solutions = document.getElementById('solutions');
+
+    ([...fens]).forEach(fen => {
+      const a = document.createElement('a')
+      a.href = 'https://lichess.org/editor/' + fen.split(' ').join('_')
+      a.innerText = fen
+      a.target = '_blank'
+
+      const li = document.createElement('li')
+      li.appendChild(a)
+
+      solutions.appendChild(li)
+    })
+  }
+}
+
 
 /***/ })
 
 /******/ });
+//# sourceMappingURL=main-bundle.js.map
