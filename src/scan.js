@@ -48,6 +48,12 @@ function runScanner ({ boardWidth, boardHeight, begin, end } = {}) {
             console.log(positionsCopy.map(p => `${'ABCDEFGH'[p.x]}${p.y + 1}`).join(' '))
             console.log(fen)
             console.log(`[!] Found ${fens.size} solution(s) in ${Date.now() - timeStart} ms`)
+
+            let preview = ''
+            for (const pos of [...positions].reverse()) {
+              preview += '-'.repeat(pos.x) + 'o' + '-'.repeat(7 - pos.x) + '\n'
+            }
+            console.log(preview)
           }
         } else {
           runInSandbox(newCellsContainer, nextCellsContainer => scanRecursively(nextCellsContainer, positions, row + 1))
